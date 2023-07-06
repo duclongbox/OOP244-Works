@@ -68,12 +68,12 @@ namespace sdds {
             std::string line;
             unsigned count = 0;
             if (f.is_open()) {
-                while (std::getline(f, line,'\n')) {
-                    m_textLines->m_value = new char[strlen(line.c_str()) + 1];
-                    strcpy(m_textLines->m_value, line.c_str());
+                while (std::getline(f, line)) {                   
+                    m_textLines[count] = line.c_str();
                     count++;
                 }
             }
+            //update the number of line
             m_noOfLines = count;
         }
     }
@@ -91,13 +91,16 @@ namespace sdds {
         m_pageSize = pageSize;
 
     }
-    TextFile::TextFile(const char* filename, unsigned pageSize): m_filename(nullptr), m_noOfLines(0), m_textLines(nullptr), m_pageSize(pageSize) {
+    TextFile::TextFile(const char* filename, unsigned pageSize){
+        setEmpty();
+        m_pageSize = pageSize;
         if (filename != nullptr) {
             setFilename(filename);
             setNoOfLines();
             loadText();
         }
     }
+    // constructor coppy
     TextFile::TextFile(const TextFile& other) {
         m_filename = nullptr;
         m_noOfLines = 0;
@@ -105,17 +108,18 @@ namespace sdds {
         m_pageSize = other.m_pageSize;
         if (other.m_filename != nullptr) {
             setFilename(other.m_filename, true);
-            saveAs(other.m_filename);
+            other.saveAs(m_filename);
             setNoOfLines();
             loadText();
         }
     }
+    // copy assignment 
     TextFile& TextFile::operator=(const TextFile& other) {
         if (this != &other) {
             if (this->m_filename != nullptr && other.m_filename != nullptr) {
                 delete[] m_textLines;
                 m_textLines = nullptr;
-                saveAs(other.m_filename);
+                other.saveAs(m_filename);
                 setNoOfLines();
                 loadText();
             }
@@ -130,29 +134,33 @@ namespace sdds {
         return m_noOfLines;
     }
     std::ostream& TextFile::view(std::ostream& ostr)const {
-        if (m_filename != nullptr || m_textLines != nullptr || m_noOfLines != 0) {
+        char c;
+        if (m_filename != nullptr && m_textLines != nullptr && m_noOfLines != 0) {
             ostr << m_filename << endl;
             for (int i = 0; i < strlen(m_filename); i++) {
                 ostr << "=";
             }
             ostr << endl;
             unsigned i = 0;
-            for (i = 0; i < m_noOfLines && i < m_pageSize; i++) {
-                ostr << m_textLines[i] << endl;
-            }
-            if (i < m_noOfLines) {
-                while (i < m_noOfLines) {
+            while (i < m_noOfLines) {
+                for (unsigned j = 0; j < m_pageSize && i < m_noOfLines; j++) {
+                    ostr << m_textLines[i] << std::endl;
+                    i++;
+                }
+
+                if (i < m_noOfLines) {
                     char ch;
                     ostr << "Hit ENTER to continue...";
-                    // wait user to input something to continue
+
                     cin.get(ch);
-                    // continue print the text line.
-                    for (unsigned k = 0; k < m_pageSize; k++) {
-                        ostr << m_textLines[i] << endl;
-                        i++;
-                    }
+                    /*if (ch == '\n') {
+                        while ((c = getchar()) != '\n') {};
+                   }*/
+
                 }
             }
+
+
             
         }
         return ostr;
@@ -160,13 +168,16 @@ namespace sdds {
     std::istream& TextFile::getFile(std::istream& istr) {
         
         std::string filename;
-        istr >> filename;
+        istr >> filename; 
         setFilename(filename.c_str()); // convert string object to const string 
         setNoOfLines();
         loadText();
+        //clear the buffer after input the filename
+        istr.ignore();
         return istr;
         
     }
+    //print the line according to the index
     const char* TextFile::operator[](unsigned index)const {
         if (m_textLines!=nullptr) {
             if (index >= m_noOfLines) {
@@ -178,6 +189,7 @@ namespace sdds {
     const char* TextFile::name()const {
         return m_filename;
     }
+    //bool cast
     TextFile::operator bool()const{
         bool result=false;
         if (m_textLines != nullptr) {
