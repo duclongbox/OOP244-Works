@@ -158,10 +158,7 @@ namespace sdds {
                    }*/
 
                 }
-            }
-
-
-            
+            }           
         }
         return ostr;
     }
