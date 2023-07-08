@@ -3,11 +3,12 @@
 #include <fstream>
 #include <string>
 #include "TextFile.h"
-#include "C:\Users\Admin\source\repos\workshop2\cstring.h"
+#include "C:/OOP244/OOP244-Works/workshop2/cstring.h"
 using namespace std;
 namespace sdds {
+    // return the address held on m_value
     Line::operator const char* () const {
-        return (const char*)m_value; // return the address held on m_value
+        return (const char*)m_value; 
     }
     Line& Line::operator=(const char* lineValue) {
         delete[] m_value;
@@ -18,7 +19,7 @@ namespace sdds {
     Line::~Line() {
         delete[] m_value;
     }
-   
+   // delete allocated memory for m_filname
     void TextFile::setEmpty() {
         delete[] m_textLines;
         m_textLines = nullptr;
@@ -26,6 +27,7 @@ namespace sdds {
         m_filename = nullptr;
         m_noOfLines = 0;
     }
+    // copy the file name received to new source, with the default bool is false
     void TextFile::setFilename(const char* fname, bool isCopy) {
         if (!isCopy) {
             m_filename = new char[strlen(fname) + 1];
@@ -37,6 +39,7 @@ namespace sdds {
             strcat(m_filename, fname);
         }
     }
+    // set the number of line
     void TextFile::setNoOfLines() {
         m_noOfLines = 0;
         std::ifstream f(m_filename);
@@ -57,6 +60,7 @@ namespace sdds {
         }
 
     }
+    // read all the lines from text file using getline function to read input stream.
     void TextFile::loadText() {
         if (m_filename != nullptr) {
             if (m_textLines != nullptr) {
@@ -77,7 +81,7 @@ namespace sdds {
             m_noOfLines = count;
         }
     }
-    
+    // save the content of the current file under new name
     void TextFile::saveAs(const char* fileName)const {
         std::ofstream out(fileName);
         unsigned i;
@@ -86,6 +90,7 @@ namespace sdds {
         }
 
     }
+    // constructor
     TextFile::TextFile(unsigned pageSize) {
         setEmpty();
         m_pageSize = pageSize;
@@ -133,6 +138,7 @@ namespace sdds {
     unsigned TextFile::lines()const {
         return m_noOfLines;
     }
+    // output the content of file according to pageSize
     std::ostream& TextFile::view(std::ostream& ostr)const {
         char c;
         if (m_filename != nullptr && m_textLines != nullptr && m_noOfLines != 0) {
@@ -147,7 +153,6 @@ namespace sdds {
                     ostr << m_textLines[i] << std::endl;
                     i++;
                 }
-
                 if (i < m_noOfLines) {
                     char ch;
                     ostr << "Hit ENTER to continue...";
