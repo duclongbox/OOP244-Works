@@ -92,12 +92,18 @@ namespace sdds {
     }
     // constructor
     TextFile::TextFile(unsigned pageSize) {
-        setEmpty();
+        //setEmpty();
+	m_filename = nullptr;
+        m_noOfLines = 0;
+        m_textLines = nullptr;
         m_pageSize = pageSize;
 
     }
     TextFile::TextFile(const char* filename, unsigned pageSize){
-        setEmpty();
+        //setEmpty();
+	 m_filename = nullptr;
+        m_noOfLines = 0;
+        m_textLines = nullptr;
         m_pageSize = pageSize;
         if (filename != nullptr) {
             setFilename(filename);
