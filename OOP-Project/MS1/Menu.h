@@ -32,7 +32,13 @@ namespace sdds {
 		std::ostream& viewMenu(std::ostream& ostr)const;
 		unsigned int run() const;
 		unsigned int operator~() const;
+		Menu& operator<<(const char* menuitemConent);
+		operator int() const;
+		operator unsigned int() const;
+		operator bool() const;
+		friend std::ostream& operator<<(std::ostream& os, const Menu& menu);
 
+		const char* operator[](unsigned index) const;
 	};
 }
 
