@@ -180,8 +180,7 @@ namespace sdds {
         setFilename(filename.c_str()); // convert string object to const string 
         setNoOfLines();
         loadText();
-        //clear the buffer after input the filename
-        istr.ignore();
+        istr.ignore();// ignore the next input 
         return istr;
         
     }
