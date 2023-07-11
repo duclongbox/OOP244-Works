@@ -115,7 +115,7 @@ namespace sdds {
    }
    std::ostream& Date::write(std::ostream& os)const {
        if (bad()) {
-           os << dateStatus() << endl;
+           os << dateStatus();
        }
        else {
            //print the year

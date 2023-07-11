@@ -1,7 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include <iostream>
-
+#include <cstring>
 const unsigned  MAX_MENU_ITEMS = 20;
 namespace sdds {
 	class MenuItem {
@@ -14,7 +14,7 @@ namespace sdds {
 		operator bool() const;
 		operator const char* () const;
 		void display(std::ostream& ostr ) const;
-		friend class Menu;
+		
 	};
 	class Menu {
 		MenuItem m_title;
@@ -32,7 +32,7 @@ namespace sdds {
 		unsigned int run() const;
 		unsigned int operator~() const;
 		Menu& operator<<(const char* menuitemConent);
-		operator int() const;
+		operator unsigned int() const;
 		operator bool() const;
 		const char* operator[](unsigned index) const;
 	};

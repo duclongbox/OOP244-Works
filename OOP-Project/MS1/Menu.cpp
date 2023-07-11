@@ -39,7 +39,7 @@ namespace sdds {
 		// no MenuItems
 		m_numOfItems = 0;
 		//A Menu is always created empty 
-		m_menuItems[0] = nullptr;
+		//m_menuItems[0] = nullptr;
 	}
 	Menu::Menu(const char* title) {
 		m_numOfItems = 0;
@@ -69,12 +69,14 @@ namespace sdds {
 	}
 	// display the entire menu
 	std::ostream& Menu::viewMenu(std::ostream& ostr)const {
-		viewTitle(ostr);
-		ostr << endl;
+		if (m_title != nullptr) {
+			viewTitle(ostr);
+			ostr << ":" << endl;
+		}
 		for (int i = 0; i < m_numOfItems; i++) {
 			ostr.setf(ios::right);
 			ostr.width(2);
-			ostr.fill();
+			ostr.fill(' ');
 			ostr << i + 1;
 			ostr << "- ";
 			m_menuItems[i]->display(ostr);
@@ -97,14 +99,14 @@ namespace sdds {
 	}
 	//add menu Item to the menu 
 	Menu& Menu::operator<<(const char* menuitemConent) {
-		if (m_numOfItems < MAX_MENU_ITEMS) {
+		if ((unsigned int)m_numOfItems < MAX_MENU_ITEMS) {
 			m_menuItems[m_numOfItems] = new MenuItem(menuitemConent);
 			m_numOfItems++;
 		}
 		return *this;
 	}
 	// overload the conversion integer
-	Menu::operator int() const {
+	Menu::operator unsigned int() const {
 		return m_numOfItems;
 	}
 	// bool one or more items

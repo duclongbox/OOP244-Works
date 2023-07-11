@@ -18,15 +18,18 @@ using namespace std;
 namespace sdds {
 	// read the selection from user
 	unsigned int  read(int number) {
-		unsigned selection;
+		unsigned int selection=0;
 		bool result = true;
 		while (result) {
-			cin >> selection;
-			if (selection == '\0' || selection<0 || selection>number) {
+			cin>>selection;
+			if (cin.fail() || selection>(unsigned)number) {
+				cin.clear(); //clear the error state
 				while (cin.get() != '\n') {}; // clear the  buffer
 				cout << "Invalid Selection, try again: ";
+
 			}
 			else {
+				
 				result = false;
 			}
 		}
