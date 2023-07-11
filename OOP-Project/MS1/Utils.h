@@ -14,8 +14,8 @@
 ***********************************************************************/
 #ifndef SDDS_UTILS_H__
 #define SDDS_UTILS_H__
-
+#include <iostream>
 namespace sdds {
-
+	unsigned int  read(int number);
 }
 #endif // SDDS_UTILS_H__

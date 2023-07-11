@@ -5,9 +5,8 @@
 const unsigned  MAX_MENU_ITEMS = 20;
 namespace sdds {
 	class MenuItem {
-		char* m_content;
+		char* m_content{ nullptr };
 		friend class Menu;
-		MenuItem() {};
 		MenuItem(const char* content = nullptr);
 		MenuItem(const MenuItem& other) = delete;
 		MenuItem& operator=(const MenuItem& other) = delete;
@@ -34,12 +33,11 @@ namespace sdds {
 		unsigned int operator~() const;
 		Menu& operator<<(const char* menuitemConent);
 		operator int() const;
-		operator unsigned int() const;
 		operator bool() const;
-		friend std::ostream& operator<<(std::ostream& os, const Menu& menu);
-
 		const char* operator[](unsigned index) const;
 	};
+	std::ostream& operator<<(std::ostream& os, const Menu& menu);
+
 }
 
 #endif
