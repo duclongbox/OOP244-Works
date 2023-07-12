@@ -39,7 +39,7 @@ namespace sdds {
 		// no MenuItems
 		m_numOfItems = 0;
 		//A Menu is always created empty 
-		//m_menuItems[0] = nullptr;
+		m_menuItems[0] = nullptr;
 	}
 	Menu::Menu(const char* title) {
 		m_numOfItems = 0;

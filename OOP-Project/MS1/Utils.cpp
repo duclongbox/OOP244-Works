@@ -2,8 +2,8 @@
 // OOP244 Utils Module
 // File	Utils.cpp
 // Version
-// Date
-// Author
+// Date    7/11/2023
+// Author  Long Duc Hoang
 // Description
 //
 // Revision History
