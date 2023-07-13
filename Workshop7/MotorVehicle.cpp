@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include"MotorVehicle.h"
 
@@ -10,13 +11,13 @@ namespace sdds {
 		m_year = 0;
 	}
 	MotorVehicle::MotorVehicle(const char* number, int year) {
-		strCpy(m_license, number);
+		strcpy(m_license, number);
 		m_year = year;
-		strCpy(m_address,"Factory");
+		strcpy(m_address,"Factory");
 	}
 	// move to new address
 	void MotorVehicle::moveTo(const char* address) {
-		if (!strCmp(m_address,address)) {
+		if (strcmp(m_address,address)) {
 			cout << "|";
 			cout.setf(ios::right);
 			cout.width(8);
@@ -26,18 +27,21 @@ namespace sdds {
 			cout.setf(ios::right);
 			cout.width(20);
 			cout.fill(' ');
-			cout << m_address << " --->";
+			cout << m_address << " ---> ";
+			cout.unsetf(ios::right);
 			cout.setf(ios::left);
 			cout.width(20);
 			cout.fill(' ');
-			cout << address;
-			strCpy(m_address, address);
+			cout << address << endl;
+			strcpy(m_address, address);
 		}
 	}
-	ostream& MotorVehicle::write(ostream& os) {
+
+	ostream& MotorVehicle::write(ostream& os)const {
 		os << "| " << m_year << " | " << m_license << " | " << m_address;
 		return os;
 	}
+	// read from stream
 	istream& MotorVehicle::read(istream& in) {
 		cout << "Built Year: ";
 		in >> m_year;
@@ -47,11 +51,12 @@ namespace sdds {
 		in >> m_address;
 		return in;
 	}
-	std::istream& operator >> (istream& is,  MotorVehicle& motor) {
+	// helper function to insert and extract motorvehicle
+	std::istream& operator >> (istream& is,  MotorVehicle &motor) {
 		 motor.read(is);
 		 return is;
 	}
-	std::ostream& operator << (ostream& os,  MotorVehicle& motor) {
+	std::ostream& operator << (ostream& os, const MotorVehicle &motor) {
 		 motor.write(os);
 		 return os;
 	}

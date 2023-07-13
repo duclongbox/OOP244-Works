@@ -14,11 +14,11 @@ namespace sdds {
 		MotorVehicle();
 		MotorVehicle(const char* number, int year);
 		void moveTo(const char* address);
-		ostream& write(ostream& os);
-		istream& read(istream& in);
+		ostream& write(ostream& os) const;
+		istream& read(istream& in) ;
 	};
 	std::istream& operator >> (istream& is,  MotorVehicle& motor);
-	std::ostream& operator << (ostream& os,  MotorVehicle& motor);
+	std::ostream& operator << (ostream& os, const MotorVehicle& motor);
 }
 
 
