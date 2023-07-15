@@ -16,7 +16,7 @@ namespace sdds {
 	// instantiate menu and add yes to item , return true if run success
 	bool LibApp::confirm(const char* message) {
 		Menu newMenu(message);
-		newMenu << "yes";
+		newMenu << "Yes";
 		return newMenu.run();
 	}
 	// simple private functions
@@ -91,6 +91,11 @@ namespace sdds {
 					unsigned int quitChoice = m_exitMenu.run();
 					if (quitChoice == 1) {
 						save();
+						
+						exit = true;
+						
+					}
+					else if (quitChoice == 0) {
 						if (confirm("This will discard all the changes are you sure?")) {
 							exit = true;
 						}
@@ -99,12 +104,12 @@ namespace sdds {
 					}
 				}
 				else {
-					if (confirm("This will discard all the changes are you sure?")) {
-						exit = true;
-					}
+					
+					exit = true;
+				
 				}
 			}
-			
+			cout << endl;
 		}
 		cout << "-------------------------------------------" << endl << "Thanks for using Seneca Library Application" << endl;
 
