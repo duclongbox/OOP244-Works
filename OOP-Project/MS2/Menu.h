@@ -5,7 +5,7 @@
 const unsigned  MAX_MENU_ITEMS = 20;
 namespace sdds {
 	class MenuItem {
-		char* m_content{ nullptr };
+		char* m_content;
 		friend class Menu;
 		MenuItem(const char* content = nullptr);
 		MenuItem(const MenuItem& other) = delete;

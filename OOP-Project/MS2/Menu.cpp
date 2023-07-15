@@ -65,7 +65,6 @@ namespace sdds {
 	}
 	//destructor 
 	Menu::~Menu() {
-		delete[] m_title.m_content;
 		//loop through menu items array to delete each pointer
 		for (int i = 0; i < m_numOfItems; i++) {
 			delete m_menuItems[i];
