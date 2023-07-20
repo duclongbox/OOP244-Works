@@ -1,3 +1,15 @@
+/*/////////////////////////////////////////////////////////////////////////
+						  Workshop - #8
+Full Name  : Long Duc Hoang
+Student ID#: 122702228
+Email      : dhoang19@myseneca.ca
+Section    : ZAA
+Date	   : 7/12/2023
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+/////////////////////////////////////////////////////////////////////////*/
 #define _CRT_SECURE_NO_WARNINGS
 #include "Rectangle.h"
 using namespace std;
@@ -71,7 +83,7 @@ namespace sdds {
 			ostr << LblShape::label();
 			ostr << "|" << endl;
 			// nexline
-			for (int i = (m_height - 2); i < m_height - 1; i++) {
+			for (int i = 2; i < (m_height-1) ; i++) {
 				ostr << "|";
 				for (int j = 0; j < m_width - 2; j++) {
 					ostr << " ";
@@ -83,7 +95,7 @@ namespace sdds {
 			for (int i = 0; i < m_width - 2; i++) {
 				ostr << "-";
 			}
-			ostr << "+" << endl;
+			ostr << "+";
 		}
 	}
 }
