@@ -61,5 +61,10 @@ namespace sdds {
    };
    std::ostream& operator<<(std::ostream& os, const Date& RO);
    std::istream& operator>>(std::istream& is, Date& RO);
+   //global variable
+   extern bool sdds_test;
+   extern int sdds_year;
+   extern int sdds_mon;
+   extern int sdds_day;
 }
 #endif

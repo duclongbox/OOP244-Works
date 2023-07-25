@@ -15,6 +15,11 @@
 using namespace std;
 #include "Date.h"
 namespace sdds {
+    //testing purpose
+    bool sdds_test = false;
+    int sdds_year = 2023;
+    int sdds_mon = 12;
+    int sdds_day = 25;
    bool Date::validate() {
       errCode(NO_ERROR);
       if (m_year < MIN_YEAR || m_year > m_CUR_YEAR + 1) {
@@ -35,17 +40,28 @@ namespace sdds {
       return days[mon] + int((mon == 1) * ((m_year % 4 == 0) && (m_year % 100 != 0)) || (m_year % 400 == 0));
    }
    int Date::systemYear()const {
-      time_t t = time(NULL);
-      tm lt = *localtime(&t);
-      return lt.tm_year + 1900;
+       int theYear = sdds_year;
+       if (!sdds_test) {
+           time_t t = time(NULL);
+           tm lt = *localtime(&t);
+           theYear = lt.tm_year + 1900;
+       }
+       return theYear;
    }
    void Date::setToToday() {
-      time_t t = time(NULL);
-      tm lt = *localtime(&t);
-      m_day = lt.tm_mday;
-      m_mon = lt.tm_mon + 1;
-      m_year = lt.tm_year + 1900;
-      errCode(NO_ERROR);
+       if (sdds_test) {
+           m_day = sdds_day;
+           m_mon = sdds_mon;
+           m_year = sdds_year;
+       }
+       else {
+           time_t t = time(NULL);
+           tm lt = *localtime(&t);
+           m_day = lt.tm_mday;
+           m_mon = lt.tm_mon + 1;
+           m_year = lt.tm_year + 1900;
+       }
+       errCode(NO_ERROR);
    }
    int Date::daysSince0001_1_1()const { // Rata Die day since 0001/01/01 
       int ty = m_year;
@@ -109,7 +125,7 @@ namespace sdds {
            validate();
        }
        // ignore the flush keyboard
-       while (is.get() != '\n') {} //clear buffer
+       //while (is.get() != '\n') {} //clear buffer
 
        return is;
    }
