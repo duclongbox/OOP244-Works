@@ -18,7 +18,7 @@ namespace sdds {
 		/*Boolean conversion overloads of this method will return if the
 		Streamable object is in a valid state or not.*/
 		virtual operator bool() const = 0;
-		~Streamable();
+		virtual ~Streamable() {};
 	};
 	ostream& operator <<(ostream& os, const Streamable& stream);
 	istream& operator >>(istream& is, Streamable& stream);

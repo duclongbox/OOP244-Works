@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -129,13 +129,16 @@
   <ItemGroup>
     <ClCompile Include="..\MS1\Date.cpp" />
     <ClCompile Include="ms3_tester.cpp" />
+    <ClCompile Include="Publication.cpp" />
     <ClCompile Include="Streamable.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\MS1\Date.h" />
     <ClInclude Include="Lib.h" />
     <ClInclude Include="Publication.h" />
     <ClInclude Include="Streamable.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Periodicals.txt" />
