@@ -34,9 +34,11 @@ namespace sdds {
 
 		}
 		else {
-			//char ch;
+			char ch;
+		
+
 			istr.ignore(); // ignore the tab
-			getline(istr,name);
+			getline(istr, name);
 			
 		}
 		if (!istr.fail()) {
