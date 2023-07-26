@@ -6,7 +6,7 @@
 using namespace std;
 namespace sdds {
 	class Book : public Publication {
-		char* m_authorName;
+		char* m_authorName{nullptr};
 	public:
 		Book();
 		Book(const Book& other);

@@ -26,24 +26,22 @@ namespace sdds {
 	istream& Book::read(istream& istr) {
 		Publication::read(istr);
 		delete[] m_authorName;
+		m_authorName = nullptr;
 		string name;
 		if (Publication::conIO(istr)) {
 			istr.ignore(); // ignore one character
 			cout << "Author: ";
-			istr >> name;
-
+			getline(istr, name);
+		
 		}
 		else {
-			char ch;
-		
-
 			istr.ignore(); // ignore the tab
-			getline(istr, name);
-			
+			getline(istr, name,'\n');
 		}
 		if (!istr.fail()) {
 			m_authorName = new char[strLen(name.c_str()) + 1];
 			strCpy(m_authorName, name.c_str());
+			istr.ignore();
 		}
 		return istr;
 	}
@@ -71,6 +69,7 @@ namespace sdds {
 	Book& Book::operator=(const Book& other) {
 		if (this != &other) {
 			delete[] m_authorName;
+			m_authorName = nullptr;
 			if (other.m_authorName != nullptr) {
 				m_authorName = new char[strlen(other.m_authorName) + 1];
 				strCpy(m_authorName, other.m_authorName);
