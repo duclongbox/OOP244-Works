@@ -160,7 +160,7 @@ namespace sdds {
 	Publication& Publication::operator=(const Publication& other) {
 		if (this != &other) {
 			delete[] m_title;
-			//m_title = nullptr;
+			m_title = nullptr;
 			m_membership = other.m_membership;
 			m_libRef = other.m_libRef;
 			m_date = other.m_date;
