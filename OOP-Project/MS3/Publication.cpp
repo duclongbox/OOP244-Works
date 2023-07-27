@@ -92,10 +92,8 @@ namespace sdds {
 		m_libRef = -1;
 		m_date = Date();
 		string shelfID;
-		//char shelfID[30];
 		int membership=0;
 		int libRef=0;
-		//char title[SDDS_TITLE_WIDTH];
 		string title;
 		Date readDate;
 		if (conIO(istr)) {
@@ -119,11 +117,6 @@ namespace sdds {
 			istr >> shelfID;
 			istr.ignore(); //skip the tab
 			getline(istr, title, '\t');
-		/*	if (!title.empty()) {
-				m_title = new char[title.length() + 1];
-				strCpy(m_title, title.c_str());
-
-			}*/
 			istr >> membership;
 			istr.ignore(); //skip the tab
 			istr >> readDate;
@@ -175,7 +168,6 @@ namespace sdds {
 	// destructor
 	Publication::~Publication() {
 		delete[] m_title;
-		//m_title = nullptr;
 	}
 
 
