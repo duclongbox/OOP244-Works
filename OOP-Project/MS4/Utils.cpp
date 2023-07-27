@@ -1,5 +1,5 @@
 /*/////////////////////////////////////////////////////////////////////////
-						  Milestone-3
+						  Milestone-4
 Full Name  : Long Duc Hoang
 Student ID#: 122702228
 Email      : dhoang19@myseneca.ca
@@ -28,5 +28,25 @@ namespace sdds {
 			count++;
 		}
 		return count;
+	}
+	void strnCpy(char* des, const char* src, int len) {
+		int i = 0;
+
+		if (strLen(src) >= len) {
+			while (i < len) {
+				des[i] = src[i];
+				i++;
+			}
+		}
+		else
+		{
+			while (i < strLen(src)) {
+				des[i] = src[i];
+				i++;
+			}
+		}
+		// Set the last index to be NULL value
+		des[i] = '\0';
+
 	}
 }

@@ -1,5 +1,18 @@
+/*/////////////////////////////////////////////////////////////////////////
+						  MS4
+Full Name  : Long Duc Hoang
+Student ID#: 122702228
+Email      : dhoang19@myseneca.ca
+Section    : ZAA
+Date	   : 27/7/2023
+Authenticity Declaration:
+I declare this submission is the result of my own work and has not been
+shared with any other student or 3rd party content provider. This submitted
+piece of work is entirely of my own creation.
+/////////////////////////////////////////////////////////////////////////*/
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "Book.h"
 #include "Utils.h"
 using namespace std;
@@ -12,10 +25,12 @@ namespace sdds {
 	ostream& Book::write(ostream& os) const {
 		Publication::write(os);
 		if (Publication::conIO(os)) {
-			os << " ";
+			/*char authorname[1000];
+			strnCpy(authorname, m_authorName, SDDS_AUTHOR_WIDTH);*/
 			os.width(SDDS_AUTHOR_WIDTH);
 			os.fill(' ');
-			os << m_authorName << " |";
+			//substract the string
+			os << string(m_authorName).substr(0, SDDS_AUTHOR_WIDTH )<< " |";
 		}
 		else {
 			os << '\t' << m_authorName;
@@ -27,22 +42,22 @@ namespace sdds {
 		Publication::read(istr);
 		delete[] m_authorName;
 		m_authorName = nullptr;
-		string name;
+		char name[1000];
 		if (Publication::conIO(istr)) {
 			istr.ignore(); // ignore one character
 			cout << "Author: ";
-			getline(istr, name);
+			istr.getline(name, 1000);
 		}
 		else {
 			
 			istr.ignore(); // ignore the tab
-			getline(istr, name); 
+			istr.get(name,1000); 
 			
 		}
 		if (!istr.fail()) {
-			m_authorName = new char[strLen(name.c_str()) + 1];
-			strCpy(m_authorName, name.c_str());
-			istr.ignore();
+			m_authorName = new char[strLen(name) + 1];
+			strCpy(m_authorName, name);
+		
 		}
 		return istr;
 	}
@@ -72,7 +87,7 @@ namespace sdds {
 			delete[] m_authorName;
 			m_authorName = nullptr;
 			if (other.m_authorName != nullptr) {
-				m_authorName = new char[strlen(other.m_authorName) + 1];
+				m_authorName = new char[strLen(other.m_authorName) + 1];
 				strCpy(m_authorName, other.m_authorName);
 			}
 			Publication::operator=(other);
