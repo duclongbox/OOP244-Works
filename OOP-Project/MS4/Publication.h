@@ -39,8 +39,8 @@ namespace sdds {
 		int getRef()const;
 		//pure virtual function implementation
 		bool conIO(ios& io)const;
-		ostream& write(ostream& os) const;
-		istream& read(istream& istr);
+		 ostream& write(ostream& os) const;
+		 istream& read(istream& istr);
 		operator bool() const;
 		// rule of three
 		Publication(const Publication& other);

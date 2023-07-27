@@ -32,11 +32,12 @@ namespace sdds {
 			istr.ignore(); // ignore one character
 			cout << "Author: ";
 			getline(istr, name);
-		
 		}
 		else {
+			
 			istr.ignore(); // ignore the tab
-			getline(istr, name,'\n');
+			getline(istr, name); 
+			
 		}
 		if (!istr.fail()) {
 			m_authorName = new char[strLen(name.c_str()) + 1];
