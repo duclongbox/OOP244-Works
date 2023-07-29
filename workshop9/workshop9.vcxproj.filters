@@ -33,4 +33,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="dcwrLittle.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="test.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dcwrLittleOutput.html">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="dcwrOutput.html">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
