@@ -139,7 +139,7 @@ namespace sdds {
 		return (m_title != nullptr || m_shelfId[0] != '\0');
 	}
 	// copy constructor
-	Publication::Publication(const Publication& other):Streamable(other){
+	Publication::Publication(const Publication& other){
 		m_membership = other.m_membership;
 		m_libRef = other.m_libRef;
 		m_date = other.m_date;
