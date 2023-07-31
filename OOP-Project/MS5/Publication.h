@@ -22,7 +22,7 @@ namespace sdds {
 		char* m_title{nullptr};
 		char m_shelfId[SDDS_SHELF_ID_LEN+1];
 		int m_membership;
-		int m_libRef;
+		int m_libRef; //uniquely identify each publication in the system.
 		Date m_date;
 	public:
 		Publication();
