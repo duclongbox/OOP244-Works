@@ -18,9 +18,6 @@
     <ClCompile Include="LibAppMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pubSel_Tester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PublicationSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

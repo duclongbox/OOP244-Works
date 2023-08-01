@@ -5,11 +5,12 @@
 #include "Streamable.h"
 #include "Menu.h"
 #include "PublicationSelector.h"
+#include "Utils.h"
 namespace sdds {
 	class LibApp {
 		char m_filename[256];
 		Publication* m_publication[SDDS_LIBRARY_CAPACITY]; // store all records of publication 
-		int NOLP; // number of publication loaded
+        int NOLP{0}; // number of publication loaded
 		int LLRN; // library reference number
         Menu publicationType; //selection of publication type
         Menu m_mainMenu;  // main menu application
@@ -30,7 +31,8 @@ namespace sdds {
         void removePublication();
         void checkOutPub();
     public:
-        LibApp();
+        LibApp(const char* filename);
+        ~LibApp();
         void run();
 	};
  }

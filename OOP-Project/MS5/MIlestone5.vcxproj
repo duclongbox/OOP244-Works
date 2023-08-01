@@ -134,7 +134,6 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Publication.cpp" />
     <ClCompile Include="PublicationSelector.cpp" />
-    <ClCompile Include="pubSel_Tester.cpp" />
     <ClCompile Include="Streamable.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
