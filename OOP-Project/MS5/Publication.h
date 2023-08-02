@@ -13,6 +13,7 @@ piece of work is entirely of my own creation.
 #ifndef PUBLICATION_H
 #define PUBLICATION_H
 #include <iostream>
+#include <cstring>
 #include "Lib.h"
 #include "Date.h"
 #include "Streamable.h"

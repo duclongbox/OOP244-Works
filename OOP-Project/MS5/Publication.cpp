@@ -73,11 +73,11 @@ namespace sdds {
 	ostream& Publication::write(ostream& os) const {
 		if (conIO(os)) {
 			os << "| " << m_shelfId << " | ";
-			os.setf(ios::left);
+			os<<left;
 			os.width(SDDS_TITLE_WIDTH);
 			os.fill('.');
 			// substract string from 0 to title width
-			os << string(m_title).substr(0, SDDS_TITLE_WIDTH) << " | " << (m_membership != 0 ? to_string(m_membership) : " N/A ") << " | " << m_date << " | ";
+			os << string(m_title).substr(0, SDDS_TITLE_WIDTH) << " | " << (m_membership != 0 ? to_string(m_membership) : " N/A ") << " | " << m_date << " |";
 		}
 		else {
 			os << type() << '\t' << m_libRef << '\t' << m_shelfId << '\t' << m_title << '\t' << m_membership << '\t' << m_date;

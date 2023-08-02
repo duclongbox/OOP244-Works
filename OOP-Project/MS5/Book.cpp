@@ -25,12 +25,12 @@ namespace sdds {
 	ostream& Book::write(ostream& os) const {
 		Publication::write(os);
 		if (Publication::conIO(os)) {
-			/*char authorname[1000];
-			strnCpy(authorname, m_authorName, SDDS_AUTHOR_WIDTH);*/
+			os << " ";
+			os << left;
 			os.width(SDDS_AUTHOR_WIDTH);
 			os.fill(' ');
 			//substract the string
-			os << string(m_authorName).substr(0, SDDS_AUTHOR_WIDTH )<< " |";
+			os << string(m_authorName).substr(0, SDDS_AUTHOR_WIDTH) << " |";
 		}
 		else {
 			os << '\t' << m_authorName;
@@ -77,7 +77,7 @@ namespace sdds {
 	// copy constructor
 	Book::Book(const Book& other):Publication(other) {
 		if (other.m_authorName != nullptr) {
-			m_authorName = new char[strlen(other.m_authorName) + 1];
+			m_authorName = new char[strLen(other.m_authorName) + 1];
 			strCpy(m_authorName, other.m_authorName);
 		}
 	}

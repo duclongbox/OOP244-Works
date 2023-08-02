@@ -26,7 +26,7 @@ namespace sdds {
 				else if (type == 'B')
 					m_publication[i] = new Book;
 				if (m_publication[i]) {
-					infile >> *m_publication[i]; //extract the remain object to 
+					infile >> *m_publication[i]; //call the read operator
 					NOLP++;
 					LLRN = m_publication[i]->getRef(); // set the reference number
 				}
@@ -46,13 +46,13 @@ namespace sdds {
 		ofile.close();
 	}
 	int LibApp::search(int searchmode) {
-		cout << "Searching for publication" << endl;
+		bool exit = false;
 		PublicationSelector search("Select one of the following found matches:", 15);
 		unsigned int selectype = publicationType.run(); // get the type from user
 		char type;
-		while (selectype == 0) {
-			cout << "Aborted!";
-			selectype = publicationType.run();
+		int select = 0;
+		if (selectype == 0) {
+			exit = true;
 		}
 		if (selectype == 1) {
 			type = 'B';
@@ -60,51 +60,58 @@ namespace sdds {
 		else if (selectype == 2) {
 			type = 'P';
 		}
-		//get the title up to 256 characters
-		cin.ignore(); // ignore characters
-		char title[256];
-		cout << "Publication Title: ";
-		cin.get(title, 256);
-		
-		// search all items
-		if (searchmode == 1) {
-			for (int i = 0; i < NOLP; i++) {
-				if (m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
-					search << m_publication[i];
+		if (!exit) {
+			//get the title up to 256 characters
+			cin.ignore(); // ignore characters
+			char title[256];
+			cout << "Publication Title: ";
+			cin.get(title, 256,'\n');
+			while (cin.get() != '\n') {
+				// Discard characters until newline is encountered
+			}
+			// search all items make sure refernece is not delete, type match, contain the title
+			if (searchmode == 1) {
+				for (int i = 0; i < NOLP; i++) {
+					if (m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
+						search << *m_publication[i]; // call the operator receive pointer
+					}
 				}
 			}
-		}
-		// search items are on loan 
-		else if (searchmode == 2) {
-			for (int i = 0; i < NOLP; i++) {
-				if (m_publication[i]->onLoan() && m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
-					search << m_publication[i];
+			// search items are on loan make sure refernece is not delete, type match, contain the title
+			else if (searchmode == 2) {
+				for (int i = 0; i < NOLP; i++) {
+					if (m_publication[i]->onLoan() && m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
+						search << *m_publication[i];
+					}
 				}
 			}
-		}
-		// items are not onloan
-		else if (searchmode == 3) {
-			for (int i = 0; i < NOLP; i++) {
-				if (!(m_publication[i]->onLoan()) && m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
-					search << m_publication[i];
+			// items are not onloan make sure refernece is not delete, type match, contain the title
+			else if (searchmode == 3) {
+				for (int i = 0; i < NOLP; i++) {
+					if (!(m_publication[i]->onLoan()) && m_publication[i]->getRef() != 0 && m_publication[i]->type() == type && m_publication[i]->operator==(title)) {
+						search << *m_publication[i];
+					}
 				}
 			}
-		}
-		// after found match, sort the result 
-		int select = 0;
-		if (search) {
-			search.sort();
-			select = search.run();
-			if (select == 0) {
-				cout << "Aborted!" << endl;
+			// after found match, sort the result 
+			
+			if (search) {
+				search.sort();
+				select = search.run();
+				if (select <= 0) {
+					cout << "Aborted!" << endl;
+				}
+				else {
+					// print the selected publication note:getPub return the address
+					cout << *getPub(select) << endl;
+				}
 			}
 			else {
-				// print the selected publication note:getPub return the address
-				cout << *getPub(select) << endl;
+				cout << "No matches found!" << endl;
 			}
 		}
 		else {
-			cout << "No matches found!" << endl;
+			cout << "Aborted!";
 		}
 		return select;
 	}
@@ -120,7 +127,7 @@ namespace sdds {
 		return reference;
 	}
 	void LibApp::returnPub() {
-		cout << "Returning publication" << endl;
+		cout << "Return publication to the library" << endl;
 		int mode = search(2);
 		int returnDate = 0;
 		int daylate = 0;
@@ -143,57 +150,60 @@ namespace sdds {
 	}
 	void LibApp::newPublication() {
 		Publication* ptr =nullptr;
+		bool exit = false;
 		if (NOLP == SDDS_LIBRARY_CAPACITY) {
-			cout << "Library is at its maximum capacity!"<<endl;
+			cout << "Library is at its maximum capacity!";
 		}
 		else {
 			cout << "Adding new publication to the library"<<endl;
 			unsigned int selectype = publicationType.run(); // get the type from user
-			char type;
-			while (selectype == 0) {
-				cout << "Aborted!" << endl;
-				selectype = publicationType.run();
+			if (selectype == 0) {
+				exit = true;
 			}
-			if (selectype == 2) {
-				type = 'P';
+			else if (selectype == 2) {
+				//type = 'P';
 				ptr = new Publication; // instantiate dynamically object 
 			}
 			else if (selectype == 1) {
-				type = 'B';
+				//type = 'B';
 				ptr = new Book; // instantiate dynamically object 
 			}
-			//ptr->read(cin); // Read the instantiated object 
-			cin >> *ptr;
-			if (cin.fail()) {
-				while(cin.get()!='\n'){}// flush the keyboard
-				cin.clear();
-				cout << "Aborted!" << endl;
-			}
-			if(!cin.fail()) {
-				// confirm user 
-				if (confirm("Add this publication to the library?")) {
-					//if  the object is valid
-					if (ptr!=nullptr){
-						LLRN++; // add one to new publication
-						ptr->setRef(LLRN); //set the library reference number to the value
-						m_publication[NOLP] = ptr; //Add the publication object's address to PPA
-						NOLP++;
-						m_changed = true;
-						cout << "Publication added" << endl;
+			if (!exit) {
+				cin >> *ptr;
+				if (cin.fail()) {
+					while (cin.get() != '\n') {}// flush the keyboard
+					cin.clear();
+					cout << "Aborted!" << endl;
+				}
+				if (!cin.fail()) {
+					// confirm user 
+					if (confirm("Add this publication to the library?")) {
+						//if  the object is valid
+						if (ptr != nullptr) {
+							LLRN++; // add one to new publication
+							ptr->setRef(LLRN); //set the library reference number to the value
+							m_publication[NOLP] = ptr; //Add the publication object's address to PPA
+							NOLP++;
+							m_changed = true;
+							cout << "Publication added" << endl;
+						}
+						else {
+							cout << "Failed to add publication!" << endl;
+						}
 					}
 					else {
-						cout << "Failed to add publication!" << endl;
+						cout << "Aborted!" << endl;
 					}
 				}
-				else {
-					cout << "Aborted!"<< endl;
-				}
+			}
+			else {
+				cout << "Aborted!";
 			}
 		}
 		cout << endl;
 	}
 	void LibApp::removePublication() {
-		cout <<"Removing publication from library" << endl;
+		cout <<"Removing publication from the library" << endl;
 		//mode : search all the publications
 		int mode = search(1);
 		if (mode) {

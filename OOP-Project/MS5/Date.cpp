@@ -137,10 +137,12 @@ namespace sdds {
            //print the year
            os << m_year << '/';
            //print the month
+           os.setf(ios::right);
            os.width(2);
            os.fill('0');
            os << m_mon << '/';
            // print the day
+           os.setf(ios::right);
            os.width(2);
            os.fill('0');
            os << m_day;
