@@ -66,9 +66,6 @@ namespace sdds {
 			char title[256];
 			cout << "Publication Title: ";
 			cin.get(title, 256,'\n');
-			while (cin.get() != '\n') {
-				// Discard characters until newline is encountered
-			}
 			// search all items make sure refernece is not delete, type match, contain the title
 			if (searchmode == 1) {
 				for (int i = 0; i < NOLP; i++) {
