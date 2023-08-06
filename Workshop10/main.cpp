@@ -39,11 +39,11 @@ int main() {
    Collection<Employee>Eres;
 
    // Call the  listArrayElements to list all cars, Title: "All the cars:"
-   listArrayElements("All the cars",C,7);
+   listArrayElements("All the cars",C,size(C)-1);
    cout << "Searching for Tesla cars: " << endl;
    // Call the search function to search the array C 
    // and store the matches in Cres passing "Tesla" as the key argument
-   if (search(Cres,C,7,"Tesla")) {
+   if (search(Cres,C,size(C), "Tesla")) {
       cout << Cres.size() << " match" << (Cres.size() == 1 ? "" : "es") << " found:" << endl;
       for (int i = 0; i < Cres.size(); i++) {
          cout << (i + 1) << ": " << Cres[i] << endl;
@@ -55,12 +55,12 @@ int main() {
    cout << endl;
 
    // Call the  listArrayElements to list all the students, Title: "All students:"
-   listArrayElements("All students:",S,6);
+   listArrayElements("All students:",S,size(S));
 
    cout << "Searching for students with 4.0 Gpa:" << endl;
    // Call the search function to search the array S 
    // and store the matches in Sres passing 4.0 as the key argument
-   if (search(Sres,S,6,4.0)) {
+   if (search(Sres,S,size(S), 4.0)) {
       cout << Sres.size() << " match" << (Sres.size() == 1 ? "" : "es") << " found:" << endl;
       for (int i = 0; i < Sres.size(); i++) {
          cout << (i + 1) << ": " << Sres[i] << endl;
@@ -72,12 +72,12 @@ int main() {
    cout << endl;
 
    // Call the  listArrayElements to list all the employees, Title: "All employees:"
-   listArrayElements("All employees:",E,6);
+   listArrayElements("All employees:",E,size(E));
 
    cout << "Searching for employees who share office number 111:" << endl;
    // Call the search function to search the array E 
    // and store the matches in Eres passing 111 as the key argument
-   if (search(Eres,E,6,111)) {
+   if (search(Eres,E,size(E), 111)) {
       cout << Eres.size() << " match" << (Eres.size() == 1 ? "" : "es") << " found:" << endl;
       for (int i = 0; i < Eres.size(); i++) {
          cout << (i + 1) << ": " << Eres[i] << endl;
@@ -91,7 +91,7 @@ int main() {
    cout << "Searching for employees who share office number 555:" << endl;
    // Call the search function to search the array E 
    // and store the matches in Eres passing 555 as the key argument
-   if (search(Eres,E,6,555)) {
+   if (search(Eres,E,size(E), 555)) {
       cout << Eres.size() << " match" << (Eres.size() == 1 ? "" : "es") << " found:" << endl;
       for (int i = 0; i < Eres.size(); i++) {
          cout << (i + 1) << ": " << Eres[i] << endl;
@@ -106,6 +106,6 @@ int main() {
    // Call the  listArrayElements to list all the integers in the array a
    // Title: "INTEGERS"
 
-   listArrayElements("INTEGERS",a,6);
+   listArrayElements("INTEGERS",a,size(a));
    return 0;
 }
